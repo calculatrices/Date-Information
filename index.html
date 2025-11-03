@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Information Hub - Today's Date, Calendar, Week Numbers & More</title>
+    <meta name="description" content="Get accurate date information including today's date, current time, calendar, yesterday's date, tomorrow's date, week numbers, days in month, and future date calculations. Your complete date reference tool.">
+    <meta name="keywords" content="today's date, current time, calendar, yesterday's date, tomorrow's date, week number, days in month, days of week, days left in year, leap year, future dates, date calculator, online calendar">
+    <meta name="author" content="Date Information Hub">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Date Information Hub",
+      "url": "https://dateinfohub.example.com",
+      "description": "Comprehensive date information including today's date, calendar, week numbers and future date calculations.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Date Information Hub"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --info: #4895ef;
+            --border-radius: 10px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7ff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        /* SEO Content Section */
+        .seo-content {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .seo-content h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .seo-content h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+        
+        .seo-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .seo-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .seo-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Date Cards */
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .date-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .date-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .date-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .date-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .today-date {
+            color: var(--primary);
+        }
+        
+        .yesterday-date {
+            color: var(--warning);
+        }
+        
+        .tomorrow-date {
+            color: var(--success);
+        }
+        
+        .current-time {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+        
+        /* Calendar */
+        .calendar-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day {
+            text-align: center;
+            padding: 10px 5px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .calendar-date {
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .calendar-date:hover {
+            background: #e9ecef;
+        }
+        
+        .calendar-date.today {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .calendar-date.other-month {
+            color: #adb5bd;
+        }
+        
+        /* Future Dates */
+        .future-dates-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .future-dates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .future-date-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .future-date-card:hover {
+            background: #e9ecef;
+        }
+        
+        .future-date-card h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 1rem;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .faq-toggle {
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        /* About & Contact */
+        .about-content, .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .about-content h2, .contact-content h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .about-content p, .contact-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: none;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+                width: 100%;
+            }
+            
+            .date-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .future-dates-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .seo-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">📅</span>
+                    <span>Date Information Hub</span>
+                </div>
+                
+                <button class="mobile-menu-btn">☰</button>
+                
+                <nav class="mobile-menu">
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                        <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Home Page -->
+            <div class="page active" id="home-page">
+                <h1 class="section-title">Complete Date Information</h1>
+                
+                <!-- Today's Date & Current Time -->
+                <div class="date-grid">
+                    <div class="date-card">
+                        <h3>Today's Date</h3>
+                        <div id="todayDate" class="date-value today-date">Loading...</div>
+                        <p id="todayDayOfWeek">-</p>
+                    </div>
+                    
+                    <div class="date-card">
+                        <h3>Current Time</h3>
+                        <div id="currentTime" class="date-value current-time">Loading...</div>
+                        <p id="timezone">-</p>
+                    </div>
+                    
+                    <div class="date-card">
+                        <h3>Yesterday's Date</h3>
+                        <div id="yesterdayDate" class="date-value yesterday-date">Loading...</div>
+                        <p id="yesterdayDayOfWeek">-</p>
+                    </div>
+                    
+                    <div class="date-card">
+                        <h3>Tomorrow's Date</h3>
+                        <div id="tomorrowDate" class="date-value tomorrow-date">Loading...</div>
+                        <p id="tomorrowDayOfWeek">-</p>
+                    </div>
+                </div>
+                
+                <!-- Current Calendar -->
+                <h2 class="section-title">Current Calendar</h2>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prevMonth">&lt;</button>
+                        <h3 id="currentMonthYear">Month Year</h3>
+                        <button id="nextMonth">&gt;</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Additional Date Information -->
+                <h2 class="section-title">Additional Date Information</h2>
+                <div class="date-grid">
+                    <div class="date-card">
+                        <h3>Week Number</h3>
+                        <div id="weekNumber" class="date-value">-</div>
+                        <p>Current ISO week number</p>
+                    </div>
+                    
+                    <div class="date-card">
+                        <h3>Days in Current Month</h3>
+                        <div id="daysInMonth" class="date-value">-</div>
+                        <p id="currentMonthName">-</p>
+                    </div>
+                    
+                    <div class="date-card">
+                        <h3>Days Left in Year</h3>
+                        <div id="daysLeftInYear" class="date-value">-</div>
+                        <p>Days remaining in <span id="currentYear">-</span></p>
+                    </div>
+                    
+                    <div class="date-card">
+                        <h3>Next Leap Year</h3>
+                        <div id="nextLeapYear" class="date-value">-</div>
+                        <p>Next year with 366 days</p>
+                    </div>
+                </div>
+                
+                <!-- Days of the Week -->
+                <h2 class="section-title">Days of the Week</h2>
+                <div class="date-grid">
+                    <div class="date-card">
+                        <h3>Monday</h3>
+                        <p>The first day of the week in many cultures</p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Tuesday</h3>
+                        <p>Named after the Norse god Tyr</p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Wednesday</h3>
+                        <p>Named after the Norse god Odin</p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Thursday</h3>
+                        <p>Named after the Norse god Thor</p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Friday</h3>
+                        <p>Named after the Norse goddess Frigg</p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Saturday</h3>
+                        <p>Named after the Roman god Saturn</p>
+                    </div>
+                    <div class="date-card">
+                        <h3>Sunday</h3>
+                        <p>Named after the Sun</p>
+                    </div>
+                </div>
+                
+                <!-- Future Dates -->
+                <h2 class="section-title">Future Dates from Today</h2>
+                <div class="future-dates-container">
+                    <div class="future-dates-grid" id="futureDatesGrid">
+                        <!-- Future dates will be generated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- SEO Content Section -->
+                <div class="seo-content">
+                    <h2>Complete Date Information at Your Fingertips</h2>
+                    <p>Welcome to Date Information Hub, your ultimate online resource for accurate and up-to-date calendar information. Whether you're planning events, scheduling appointments, tracking deadlines, or simply need to know what date it is tomorrow, our comprehensive tools provide instant answers.</p>
+                    
+                    <h3>Why Our Date Tools Are Essential</h3>
+                    <p>In today's fast-paced world, having quick access to accurate date information is crucial. Our website offers a complete suite of date calculation tools that help you:</p>
+                    
+                    <ul>
+                        <li><strong>Plan ahead</strong> - Know tomorrow's date, next week's dates, or even dates months in advance</li>
+                        <li><strong>Stay organized</strong> - Track important dates and deadlines with our future date calculator</li>
+                        <li><strong>Understand timeframes</strong> - Calculate how many days are left in the year or when the next leap year occurs</li>
+                        <li><strong>Coordinate schedules</strong> - Use week numbers for international business and project planning</li>
+                    </ul>
+                    
+                    <h3>Comprehensive Date Features</h3>
+                    <p>Our platform goes beyond basic date display to offer a complete calendar solution:</p>
+                    
+                    <ul>
+                        <li><strong>Real-time updates</strong> - Our current time display updates every second for perfect accuracy</li>
+                        <li><strong>Interactive calendar</strong> - Navigate through months with our easy-to-use calendar interface</li>
+                        <li><strong>Historical reference</strong> - Quickly check yesterday's date for record-keeping and documentation</li>
+                        <li><strong>Future planning</strong> - Calculate dates up to 180 days in the future for long-term planning</li>
+                        <li><strong>International standards</strong> - Week numbers follow ISO 8601 for global consistency</li>
+                    </ul>
+                    
+                    <h3>How to Use Our Date Tools Effectively</h3>
+                    <p>Our website is designed for both quick reference and detailed planning. Use the current date and time for immediate needs, the calendar for monthly overviews, and the future dates section for planning ahead. The days left in year counter helps with annual goal tracking, while the leap year information is essential for long-term scheduling.</p>
+                    
+                    <p>Whether you're a student tracking assignment due dates, a professional managing project timelines, or simply someone who needs to stay organized, our date information hub provides all the tools you need in one convenient location.</p>
+                </div>
+                
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How accurate is the current time display?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Our current time display is highly accurate and updates every second based on your device's system clock. It automatically detects your timezone to ensure the time shown is correct for your location.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How are week numbers calculated?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Week numbers follow the ISO 8601 international standard. According to this system, week 1 is the week with the year's first Thursday, which means the first week always contains January 4th. This ensures consistency in international business and planning.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Can I calculate dates more than 180 days in the future?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Currently, we display future dates up to 180 days ahead for optimal performance and readability. For dates beyond this range, you can use our interactive calendar to navigate to future months and years.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How does the leap year calculation work?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Leap years occur every 4 years to account for the fact that Earth's orbit around the Sun takes approximately 365.25 days. However, years divisible by 100 are not leap years, unless they are also divisible by 400. This adjustment keeps our calendar aligned with astronomical seasons.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is this service completely free to use?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, our date information hub is completely free to use with no hidden costs, registration requirements, or usage limits. We believe that basic date information should be accessible to everyone without barriers.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Does the website work on mobile devices?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Absolutely! Our website is fully responsive and works perfectly on all devices including smartphones, tablets, and desktop computers. The layout automatically adjusts to provide the best user experience on any screen size.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How often is the date information updated?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>All date calculations are performed in real-time using JavaScript, so the information is always current. The time display updates every second, and all date calculations refresh automatically as time passes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Can I use this website for business purposes?</span>
+                                <span class="faq-toggle">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, our date tools are suitable for both personal and business use. Many professionals use our website for project planning, scheduling meetings, tracking deadlines, and other business-related date calculations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Page -->
+            <div class="page" id="about-page">
+                <div class="about-content">
+                    <h2>About Date Information Hub</h2>
+                    <p>Welcome to Date Information Hub, your comprehensive resource for all date-related information. Our mission is to provide accurate, up-to-date information about dates, calendars, and time-related calculations in an easy-to-use format.</p>
+                    
+                    <p>Our website was created to solve the common need for quick date references. Whether you're planning events, scheduling appointments, tracking deadlines, or just satisfying your curiosity, our tools provide instant answers.</p>
+                    
+                    <h3>Our Features</h3>
+                    <ul>
+                        <li>Today's date and current time with timezone detection</li>
+                        <li>Interactive calendar view</li>
+                        <li>Yesterday's and tomorrow's dates</li>
+                        <li>Week number calculations (ISO standard)</li>
+                        <li>Days in current month</li>
+                        <li>Days of the week information</li>
+                        <li>Days left in the current year</li>
+                        <li>Next leap year information</li>
+                        <li>Future dates from 1 to 180 days ahead</li>
+                        <li>Mobile-responsive design</li>
+                        <li>100% free with no registration required</li>
+                    </ul>
+                    
+                    <h3>Our Mission</h3>
+                    <p>We believe that accessing date information should be simple, fast, and reliable. Our website is designed with user experience in mind, providing all the date information you need at a glance without unnecessary complexity.</p>
+                </div>
+            </div>
+            
+            <!-- Contact Page -->
+            <div class="page" id="contact-page">
+                <div class="contact-content">
+                    <h2>Contact Us</h2>
+                    <p>We'd love to hear from you! Whether you have questions, suggestions, or feedback about our date information tools, please don't hesitate to get in touch.</p>
+                    
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </div>
+                    
+                    <h3>Other Ways to Reach Us</h3>
+                    <p>Email: contact@dateinfohub.example.com</p>
+                    <p>Follow us on social media for updates and time management tips:</p>
+                    
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; <span id="footerYear"></span> Date Information Hub. All rights reserved.</p>
+                <p>Your comprehensive source for date and time information.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Date calculation functions
+        function getWeekNumber(date) {
+            const target = new Date(date.valueOf());
+            const dayNr = (date.getDay() + 6) % 7;
+            target.setDate(target.getDate() - dayNr + 3);
+            const firstThursday = target.valueOf();
+            target.setMonth(0, 1);
+            if (target.getDay() !== 4) {
+                target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+            }
+            return 1 + Math.ceil((firstThursday - target) / 604800000);
+        }
+        
+        function isLeapYear(year) {
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        }
+        
+        function getNextLeapYear() {
+            let year = new Date().getFullYear();
+            while (!isLeapYear(year)) {
+                year++;
+            }
+            return year;
+        }
+        
+        function getDaysInMonth(year, month) {
+            return new Date(year, month + 1, 0).getDate();
+        }
+        
+        function getDaysLeftInYear() {
+            const today = new Date();
+            const endOfYear = new Date(today.getFullYear(), 11, 31);
+            const diffTime = endOfYear - today;
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+        
+        // Update all date information
+        function updateDateTime() {
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(today.getDate() - 1);
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            
+            // Format dates
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('todayDate').textContent = today.toLocaleDateString('en-US', options);
+            document.getElementById('yesterdayDate').textContent = yesterday.toLocaleDateString('en-US', options);
+            document.getElementById('tomorrowDate').textContent = tomorrow.toLocaleDateString('en-US', options);
+            
+            // Day of week
+            document.getElementById('todayDayOfWeek').textContent = today.toLocaleDateString('en-US', { weekday: 'long' });
+            document.getElementById('yesterdayDayOfWeek').textContent = yesterday.toLocaleDateString('en-US', { weekday: 'long' });
+            document.getElementById('tomorrowDayOfWeek').textContent = tomorrow.toLocaleDateString('en-US', { weekday: 'long' });
+            
+            // Current time
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('currentTime').textContent = today.toLocaleTimeString('en-US', timeOptions);
+            
+            // Timezone
+            document.getElementById('timezone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            // Week number
+            document.getElementById('weekNumber').textContent = getWeekNumber(today);
+            
+            // Days in month
+            const daysInMonth = getDaysInMonth(today.getFullYear(), today.getMonth());
+            document.getElementById('daysInMonth').textContent = daysInMonth;
+            document.getElementById('currentMonthName').textContent = today.toLocaleDateString('en-US', { month: 'long' });
+            
+            // Days left in year
+            document.getElementById('daysLeftInYear').textContent = getDaysLeftInYear();
+            document.getElementById('currentYear').textContent = today.getFullYear();
+            
+            // Next leap year
+            document.getElementById('nextLeapYear').textContent = getNextLeapYear();
+        }
+        
+        // Generate calendar
+        let currentCalendarDate = new Date();
+        
+        function generateCalendar(date) {
+            const calendarGrid = document.getElementById('calendarGrid');
+            calendarGrid.innerHTML = '';
+            
+            // Set month and year header
+            document.getElementById('currentMonthYear').textContent = 
+                date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            
+            // Add day headers
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            days.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                calendarGrid.appendChild(dayElement);
+            });
+            
+            // Get first day of month and days in month
+            const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            const daysInMonth = getDaysInMonth(date.getFullYear(), date.getMonth());
+            const startingDay = firstDay.getDay();
+            
+            // Add empty cells for days before the first day of the month
+            for (let i = 0; i < startingDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-date other-month';
+                calendarGrid.appendChild(emptyCell);
+            }
+            
+            // Add days of the month
+            const today = new Date();
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dateElement = document.createElement('div');
+                dateElement.className = 'calendar-date';
+                dateElement.textContent = i;
+                
+                // Highlight today
+                if (date.getMonth() === today.getMonth() && 
+                    date.getFullYear() === today.getFullYear() && 
+                    i === today.getDate()) {
+                    dateElement.classList.add('today');
+                }
+                
+                calendarGrid.appendChild(dateElement);
+            }
+        }
+        
+        // Generate future dates
+        function generateFutureDates() {
+            const futureDatesGrid = document.getElementById('futureDatesGrid');
+            futureDatesGrid.innerHTML = '';
+            
+            const today = new Date();
+            
+            for (let i = 1; i <= 180; i++) {
+                const futureDate = new Date(today);
+                futureDate.setDate(today.getDate() + i);
+                
+                const formattedDate = futureDate.toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                const futureCard = document.createElement('div');
+                futureCard.className = 'future-date-card';
+                futureCard.innerHTML = `
+                    <h4>${i} Day${i > 1 ? 's' : ''} From Today</h4>
+                    <div>${formattedDate}</div>
+                    <div>${futureDate.toLocaleDateString('en-US', { year: 'numeric' })}</div>
+                `;
+                
+                futureDatesGrid.appendChild(futureCard);
+            }
+        }
+        
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Navigation functionality
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and pages
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Show corresponding page
+                const pageId = link.getAttribute('data-page') + '-page';
+                document.getElementById(pageId).classList.add('active');
+            });
+        });
+        
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        });
+        
+        // Calendar navigation
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+            generateCalendar(currentCalendarDate);
+        });
+        
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+            generateCalendar(currentCalendarDate);
+        });
+        
+        // Contact form submission
+        document.querySelector('.submit-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            document.querySelector('.contact-form').reset();
+        });
+        
+        // Initialize the page
+        window.addEventListener('DOMContentLoaded', () => {
+            updateDateTime();
+            generateCalendar(currentCalendarDate);
+            generateFutureDates();
+            
+            // Update time every second
+            setInterval(updateDateTime, 1000);
+            
+            // Set footer year
+            document.getElementById('footerYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
